@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center text-info">Livres empruntés</h2>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mb-3">← Retour à la bibliothèque</a>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Emprunteur</th>
+                    <th>Date d'emprunt</th>
+                    <th>Date de retour</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emprunt in emprunts %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ emprunt.livre.titre }}</td>
+                    <td>{{ emprunt.livre.auteur }}</td>
+                    <td>{{ emprunt.nom_emprunteur }}</td>
+                    <td>{{ emprunt.date_emprunt.strftime('%d/%m/%Y') }}</td>
+                    <td>
+                        {% if emprunt.date_retour %}
+                            {{ emprunt.date_retour.strftime('%d/%m/%Y') }}
+                        {% else %}
+                            <span class="text-danger">Non retourné</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not emprunt.date_retour %}
+                        <form method="POST" action="{{ url_for('retour', id=emprunt.id) }}">
+                            <button type="submit" class="btn btn-success btn-sm">Retourner</button>
+                        </form>
+                        {% else %}
+                            <span class="text-muted">Déjà retourné</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

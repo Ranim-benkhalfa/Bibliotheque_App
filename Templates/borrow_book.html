@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center text-primary">Emprunter le livre "{{ livre.titre }}"</h2>
+    <form method="POST">
+        <div class="form-group mb-3">
+            <label>Nom de l'emprunteur</label>
+            <input type="text" name="nom_emprunteur" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Emprunter</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Retour</a>
+    </form>
+</div>
+{% endblock %}

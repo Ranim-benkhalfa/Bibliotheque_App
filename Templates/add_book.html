@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center text-success">Ajouter un livre</h2>
+    <form method="POST">
+        <div class="form-group mb-3">
+            <label>Titre</label>
+            <input type="text" name="titre" class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+            <label>Auteur</label>
+            <input type="text" name="auteur" class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+            <label>Année</label>
+            <input type="number" name="annee" class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+            <label>Catégorie</label>
+            <input type="text" name="categorie" class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+            <label>Nom de l'image (ex: le_petit_prince.jfif)</label>
+            <input type="text" name="image_url" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Ajouter</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Retour</a>
+    </form>
+</div>
+{% endblock %}

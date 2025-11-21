@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center text-primary">Liste des livres</h2>
+    <a href="{{ url_for('add_book') }}" class="btn btn-success mb-3">Ajouter un livre</a>
+    <div class="row">
+        {% for livre in livres %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="{{ url_for('static', filename='images/' + livre.image_url) }}" class="card-img-top" height="550px" style="object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ livre.titre }}</h5>
+                    <p class="card-text"><strong>Auteur:</strong> {{ livre.auteur }}</p>
+                    <p class="card-text"><strong>Année:</strong> {{ livre.annee }} | <strong>Catégorie:</strong> {{ livre.categorie }}</p>
+                    <p class="card-text">
+                        <strong>Disponibilité:</strong> 
+                        {% if livre.disponible %}
+                            <span class="text-success">Disponible</span>
+                        {% else %}
+                            <span class="text-danger">Emprunté</span>
+                        {% endif %}
+                    </p>
+                    <a href="{{ url_for('update_book', id=livre.id) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    <a href="{{ url_for('supprimer', id=livre.id) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                    {% if livre.disponible %}
+                        <a href="{{ url_for('emprunter', id=livre.id) }}" class="btn btn-primary btn-sm">Emprunter</a>
+                    {% else %}
+                        <a href="{{ url_for('borrowed_books') }}" class="btn btn-secondary btn-sm">Voir emprunt</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

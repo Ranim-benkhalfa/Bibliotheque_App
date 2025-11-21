@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center text-warning">Modifier le livre</h2>
+    <form method="POST">
+        <div class="form-group mb-3">
+            <label>Titre</label>
+            <input type="text" name="titre" class="form-control" value="{{ livre.titre }}" required>
+        </div>
+        <div class="form-group mb-3">
+            <label>Auteur</label>
+            <input type="text" name="auteur" class="form-control" value="{{ livre.auteur }}" required>
+        </div>
+        <div class="form-group mb-3">
+            <label>Année</label>
+            <input type="number" name="annee" class="form-control" value="{{ livre.annee }}" required>
+        </div>
+        <div class="form-group mb-3">
+            <label>Catégorie</label>
+            <input type="text" name="categorie" class="form-control" value="{{ livre.categorie }}" required>
+        </div>
+        <div class="form-group mb-3">
+            <label>Nom de l'image</label>
+            <input type="text" name="image_url" class="form-control" value="{{ livre.image_url }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Retour</a>
+    </form>
+</div>
+{% endblock %}
